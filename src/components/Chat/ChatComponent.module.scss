@@ -21,10 +21,29 @@
   margin-bottom: auto;
 
   height: 90%;
+
+  .right_side {
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 85%;
+  }
+
+  .left_side {
+
+  }
+
+  .message {
+    display: flex;
+    width: fit-content;
+    padding: 10px 15px 10px 15px;
+    border-radius: 20px;
+    background: #c5c5c5;
+    text-align: center;
+  }
 }
 
 .message_input {
-  width: 90%;
+  width: 86%;
   height: 50%;
   border-radius: 5px;
   border: 1px solid;

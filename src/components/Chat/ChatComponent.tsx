@@ -15,6 +15,7 @@ const ChatComponent = () => {
     const handleSendMessage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         SendMessageUtilInRoom(roomId, currentUser, message!)
+        setMessage('')
         //window.location.reload()
     }
 
@@ -26,9 +27,16 @@ const ChatComponent = () => {
         <div className={styles.grid}>
             <div className={styles.text_body}>
                 {GetMessagesByRoomIdUtil(roomId!).map((message) => {
-                   return <>
-                        {message.text}
-                   </>
+                    let style = ''
+                    if (message.user_id === GetCurrentUser().id)
+                        style = styles.right_side
+                    else
+                        style = styles.left_side
+                    return <div className={style}>
+                        <p className={styles.message}>
+                            {message.text}
+                        </p>
+                    </div>
                 })}
             </div>
             <div className={styles.grid_bottom}>

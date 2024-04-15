@@ -7,24 +7,17 @@ import {MessagesInterface} from "../../interfaces/MessagesInterface";
 
 export const SendMessageUtilInRoom = (roomId: string, user: UserInterface, text: string) => {
     const messages = GetAllMessagesUtil()
-    const roomMessages =
-        messages.find((message: MessagesInterface) => message.room_id === roomId)
+    const indexCurrentRoom = messages
+        ? messages.findIndex(message => message.room_id === roomId)
+        : -1;
 
-    console.log(roomMessages);
     const newMessage: SingleMessageInterface = {
         text,
         date: new Date(),
         user_id: user.id,
     }
-    roomMessages?.data?.push(newMessage)
-    messages.map((message) => {
-        if (message.room_id === roomId)
-            return {
-                ...message,
-                data: roomMessages?.data
-            }
-    })
-    console.log(messages);
+    messages[indexCurrentRoom].data.push(newMessage)
 
-    //localStorage.setItem(MessageEnum.MESSAGES, JSON.stringify(messages))
+    localStorage.setItem(MessageEnum.MESSAGES, JSON.stringify(messages))
+    console.log(messages);
 }
